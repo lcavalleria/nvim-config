@@ -70,8 +70,17 @@ local values_of = function(t)
 	return vt
 end
 
+local keys_of = function(t)
+	local kt = {}
+	for k, _ in pairs(t) do
+		table.insert(kt, k)
+	end
+	return kt
+end
+
 M.flatten = flatten
 M.table_to_string = table_to_string
 M.values_of = values_of
+M.keys_of = keys_of
 
 return M

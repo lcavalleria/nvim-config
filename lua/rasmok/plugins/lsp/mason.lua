@@ -29,9 +29,10 @@ return {
 		})
 
 		local tools = require("rasmok.tooling")
+
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
-			ensure_installed = tools.lsps,
+			ensure_installed = table_utils.keys_of(tools.lsps),
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true,
 		})
@@ -40,8 +41,9 @@ return {
 		local tools_to_install = values_of(flatten({ flatten(tools.formatters), flatten(tools.linters) }))
 		mason_tool_installer.setup({
 			ensure_installed = tools_to_install,
-			debounce_hours = 24,
+			-- debounce_hours = 24,
 			-- auto_update = true
 		})
+
 	end,
 }

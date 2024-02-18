@@ -1,9 +1,9 @@
 local M = {}
 
-M.lsps = {
-	"lua_ls",
-	"pyright",
-  "rust_analyzer"
+M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
+  lua_ls = {require("rasmok.plugins.lsp.settings.lua_ls")},
+	pyright = {},
+  rust_analyzer = {},
 }
 
 M.formatters = {

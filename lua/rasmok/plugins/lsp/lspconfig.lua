@@ -14,7 +14,7 @@ return {
 
 		-- assign keybinds on attach
 
-		local client = Nil -- TODO: assign real client
+		local client = nil -- TODO: assign real client
 		local on_attach = require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
 
 		-- used to enable autocompletion (assign to every lsp server config)
@@ -27,17 +27,14 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+    local lsps = require("rasmok.tooling").lsps
 		-- configure language servers
-		-- Python
-		lspconfig["pyright"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		-- Lua
-		lspconfig["lua_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			settings = require("rasmok.plugins.lsp.settings.lua_ls"),
-		})
+    for k, v in pairs(lsps) do
+      lspconfig[k].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = v
+      })
+    end
 	end,
 }
