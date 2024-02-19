@@ -27,7 +27,7 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-    local lsps = require("rasmok.tooling").lsps
+    local lsps = require("lua.rasmok.language-tools").lsps
 		-- configure language servers
     for k, v in pairs(lsps) do
       lspconfig[k].setup({

@@ -4,7 +4,7 @@ return {
 	config = function()
 		local conform = require("conform")
 
-		local formatters = require("rasmok.tooling").formatters
+		local formatters = require("lua.rasmok.language-tools").formatters
 		conform.setup({
 			formatters_by_ft = formatters,
 		})

@@ -1,9 +1,19 @@
 local M = {}
 
+M.treesitter = { -- Languages we want to install in treesitter
+	"python",
+	"json",
+	"yaml",
+	"bash",
+	"lua",
+	"gitignore",
+	"rust",
+}
+
 M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
-  lua_ls = {require("rasmok.plugins.lsp.settings.lua_ls")},
+	lua_ls = { require("rasmok.plugins.lsp.settings.lua_ls") },
 	pyright = {},
-  rust_analyzer = {},
+	rust_analyzer = {},
 }
 
 M.formatters = {

@@ -1,15 +1,10 @@
-config = function()
+local languages = require("lua.rasmok.language-tools").treesitter
+
+local config = function()
 	require("nvim-treesitter.configs").setup({
 		indent = { enable = true },
 		autotag = { enable = true },
-		ensure_installed = { -- language syntax we want to install
-			"python",
-			"json",
-			"yaml",
-			"bash",
-			"lua",
-			"gitignore",
-		},
+		ensure_installed = languages, -- language syntax we want to install
 		auto_install = true,
 		highlight = {
 			enable = true,
