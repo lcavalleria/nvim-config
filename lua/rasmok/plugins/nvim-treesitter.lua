@@ -1,4 +1,4 @@
-local languages = require("lua.rasmok.language-tools").treesitter
+local languages = require("rasmok.language-tools").treesitter
 
 local config = function()
 	require("nvim-treesitter.configs").setup({

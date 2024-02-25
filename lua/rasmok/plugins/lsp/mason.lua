@@ -28,7 +28,7 @@ return {
 			},
 		})
 
-		local tools = require("lua.rasmok.language-tools")
+		local tools = require("rasmok.language-tools")
 
 		mason_lspconfig.setup({
 			-- list of servers for mason to install

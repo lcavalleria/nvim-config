@@ -1,72 +1,71 @@
 local M = {}
 
+local Map = function(mode, lhs, rhs, opts)
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts) -- Force opts passed by parameters if collision
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
+end
+
 -- generic keymaps
 M.global = function()
-	local keymap = vim.keymap
-
 	-- Directory navigation
-	keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
-	keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+	Map("n", "<leader>m", ":NvimTreeFocus<CR>", { desc = "Navigate file tree" })
+	Map("n", "<leader>f", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
 
 	-- Pane navigation
-	keymap.set("n", "<C-k>", "<C-w>k", opts) -- Navigate up
-	keymap.set("n", "<C-h>", "<C-w>h", opts) -- Navigate left
-	keymap.set("n", "<C-j>", "<C-w>j", opts) -- Navigate down
-	keymap.set("n", "<C-l>", "<C-w>l", opts) -- Navigate right
+	Map("n", "<C-k>", "<C-w>k", { desc = "Navigate pane up" })
+	Map("n", "<C-h>", "<C-w>h", { desc = "Navigate pane left" })
+	Map("n", "<C-j>", "<C-w>j", { desc = "Navigate pane down" })
+	Map("n", "<C-l>", "<C-w>l", { desc = "Navigate pane down" })
 
 	-- Window Management
-	keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split vertically
-	keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split horizontally
+	Map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
+	Map("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
 
 	-- Telescope
-	keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Fuzzy find files in cwd" })
-	keymap.set("n", "<leader>fr", ":Telescope oldfiles<CR>", { desc = "Fuzzy find recent files" })
-	keymap.set("n", "<leader>fk", ":Telescope keymaps<CR>", { desc = "Find keymaps" })
-	keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Find help tags" })
-	keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find string in cwd" })
-	keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffer" })
+	Map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Fuzzy find files in cwd" })
+	Map("n", "<leader>fr", ":Telescope oldfiles<CR>", { desc = "Fuzzy find recent files" })
+	Map("n", "<leader>fk", ":Telescope keymaps<CR>", { desc = "Find keymaps" })
+	Map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Find help tags" })
+	Map("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find string in cwd" })
+	Map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffer" })
 
 	-- Comment
-	vim.api.nvim_set_keymap("n", "<leader>c", "gcc", { noremap = false }) -- Telescope buffers
-	vim.api.nvim_set_keymap("v", "<leader>c", "gb", { noremap = false }) -- Telescope buffers
+	Map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment line" , noremap = false})
+	Map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)", { desc = "Comment selection", noremap = false })
 
 	-- Indenting (keep selection)
-	keymap.set("v", "<", "<gv")
-	keymap.set("v", ">", ">gv")
+	Map("v", "<", "<gv", { desc = "Decrease indentation level" })
+	Map("v", ">", ">gv", { desc = "Increase indentation level" })
 end
 
 -- lsp keymaps
-M.on_lsp_attach = function(client, bufnr)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.keymap
-
-	return function(client, bufnr)
-		opts.buffer = bufnr
-
-		opts.desc = "Show LSP references"
-		keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-		keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-	end
+M.on_lsp_attach = function(client, bufnr) -- client unused, keep here as a reminder that it may be useful
+	Map("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Show LSP references (Buffer)" })
+	Map(
+		"n",
+		"<leader>gR",
+		"<cmd>Telescope lsp_references<CR>",
+		{ buffer = bufnr, desc = "Show LSP references (Telescope)" }
+	)
+	Map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Smart rename" })
+	Map("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
+	Map("n", "<leader>gd", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to definition" })
+	Map({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help" })
 end
 
 M.formatting = function(conform, formatting_opts)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.keymap
-
-	opts.desc = "Format file or range (in visual mode)"
-	keymap.set({ "n", "v" }, "<leader>l", function()
+	Map({ "n", "v" }, "<leader>l", function()
 		conform.format(formatting_opts)
-	end, opts)
+	end, { desc = "Format file or range (in visual mode)" })
 end
 
 M.linting = function(lint)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.keymap
-
-	opts.desc = "Format file or range (in visual mode)"
-	keymap.set({ "n" }, "<leader>i", function()
+	Map({ "n" }, "<leader>i", function()
 		lint.try_lint()
-	end, opts)
+	end, { desc = "Apply linting" })
 end
 
 return M
