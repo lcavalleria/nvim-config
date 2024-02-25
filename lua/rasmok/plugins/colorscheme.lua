@@ -14,5 +14,8 @@ return {
 		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 		vim.api.nvim_set_hl(0, "FloatTile", { bg = "none" })
 		vim.api.nvim_set_hl(0, "FloatFooter", { bg = "none" })
+
+		-- Inlay Hints
+		vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#6e4986", bg = "none" })
 	end,
 }

@@ -6,7 +6,7 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true }, -- for name file refactoring
 	},
 	opts = {
-		inlay_hint = { enabled = true },
+		inlay_hints = { enabled = true },
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -17,7 +17,7 @@ return {
 			require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
 			-- TODO: move to autocmd 'LspAttach'?. Fix after 0.10 release (may have changed)
 			if client.server_capabilities.inlayHintProvider then
-				vim.lsp.inlay_hint.enable(bufnr, true) -- TODO: need to wait until nvim version 0.10.
+				vim.lsp.inlay_hint.enable(bufnr, true)
 			end
 		end
 		-- used to enable autocompletion (assign to every lsp server config)

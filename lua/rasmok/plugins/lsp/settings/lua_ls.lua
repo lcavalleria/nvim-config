@@ -4,6 +4,7 @@ return {
 		diagnostics = {
 			globals = { "vim" },
 		},
+    hint = { enable = true } ,
 		workspace = {
 			-- make language server aware of runtime files
 			library = {
