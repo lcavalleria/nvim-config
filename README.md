@@ -7,5 +7,8 @@
 - ripgrep
 
 ## Language specific
+### Python
+#### pyright: 
+- node
 ### Rust
 - analyzer, cargo clippy ??? 
