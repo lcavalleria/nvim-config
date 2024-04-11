@@ -8,6 +8,15 @@ local Map = function(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
+local function close_floating()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local config = vim.api.nvim_win_get_config(win)
+		if config.relative ~= "" then
+			vim.api.nvim_win_close(win, false)
+		end
+	end
+end
+
 -- generic keymaps
 M.global = function()
 	-- Directory navigation
@@ -23,6 +32,7 @@ M.global = function()
 	-- Window Management
 	Map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertically" })
 	Map("n", "<leader>sh", ":split<CR>", { desc = "Split horizontally" })
+	Map("n", "<Esc>", close_floating, { desc = "Close all flating windows" })
 
 	-- Telescope
 	Map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Fuzzy find files in cwd" })
@@ -33,7 +43,7 @@ M.global = function()
 	Map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffer" })
 
 	-- Comment
-	Map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment line" , noremap = false})
+	Map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment line", noremap = false })
 	Map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)", { desc = "Comment selection", noremap = false })
 
 	-- Indenting (keep selection)
@@ -54,16 +64,17 @@ M.on_lsp_attach = function(client, bufnr) -- client unused, keep here as a remin
 	Map("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
 	Map("n", "<leader>gd", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to definition" })
 	Map({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help" })
+	Map("n", "<leader>i", vim.diagnostic.open_float, { desc = "Show diagnostic float" })
 end
 
 M.formatting = function(conform, formatting_opts)
-	Map({ "n", "v" }, "<leader>l", function()
+	Map({ "n", "v" }, "<leader>ll", function()
 		conform.format(formatting_opts)
 	end, { desc = "Format file or range (in visual mode)" })
 end
 
 M.linting = function(lint)
-	Map({ "n" }, "<leader>i", function()
+	Map({ "n" }, "<leader>l", function()
 		lint.try_lint()
 	end, { desc = "Apply linting" })
 end

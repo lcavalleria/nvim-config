@@ -16,6 +16,6 @@ return {
 		vim.api.nvim_set_hl(0, "FloatFooter", { bg = "none" })
 
 		-- Inlay Hints
-		vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#6e4986", bg = "none" })
+		vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#504050", bg = "none" })
 	end,
 }
