@@ -42,9 +42,9 @@ return {
 		end
 
 		-- set floating windows borders
-		local border = { border = "rounded" }
-		vim.diagnostic.config({ float = border })
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border)
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border)
+		vim.diagnostic.config({ float = { source = true, border = "rounded" } })
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+		vim.lsp.handlers["textDocument/signatureHelp"] =
+			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 	end,
 }

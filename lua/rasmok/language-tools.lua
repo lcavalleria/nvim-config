@@ -10,6 +10,7 @@ M.treesitter = { -- Languages we want to install in treesitter
 	"rust",
 	"markdown",
 	"vimdoc",
+	"html",
 }
 
 M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
