@@ -8,6 +8,8 @@ M.treesitter = { -- Languages we want to install in treesitter
 	"lua",
 	"gitignore",
 	"rust",
+	"markdown",
+	"vimdoc",
 }
 
 M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
@@ -22,7 +24,7 @@ M.formatters = {
 }
 
 M.linters = {
---	lua = { "luacheck" },
+	--	lua = { "luacheck" },
 	python = { "pylint" },
 }
 
