@@ -78,9 +78,23 @@ local keys_of = function(t)
 	return kt
 end
 
+local map_values -- declare early to call recursively
+map_values = function(t, f)
+	local mt = {}
+	for k, v in pairs(t) do
+		if type(v) == "string" then
+			mt[k] = f(v)
+		else
+			mt[k] = map_values(v, f)
+		end
+	end
+	return mt
+end
+
 M.flatten = flatten
 M.table_to_string = table_to_string
 M.values_of = values_of
 M.keys_of = keys_of
+M.map_values = map_values
 
 return M

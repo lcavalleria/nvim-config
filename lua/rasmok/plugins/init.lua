@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
-		opts = { filters = { dotfiles = true } },
+		opts = { filters = { dotfiles = true, git_ignored = false }, update_focused_file = { enable = true, update_root = true } },
 	},
 	"folke/which-key.nvim",
 	{ -- Comments

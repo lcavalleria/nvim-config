@@ -11,22 +11,26 @@ M.treesitter = { -- Languages we want to install in treesitter
 	"markdown",
 	"vimdoc",
 	"html",
+	"sql",
 }
 
 M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
 	lua_ls = require("rasmok.plugins.lsp.settings.lua_ls"),
 	pyright = {},
 	rust_analyzer = require("rasmok.plugins.lsp.settings.rust_analyzer"), -- also handles formatting and linting
+	sqlls = {},
 }
 
 M.formatters = {
 	lua = { "stylua" },
 	python = { "isort", "black" }, -- isort for imports, black for formatting
+	sql = { "sql-formatter" },
 }
 
 M.linters = {
-	--	lua = { "luacheck" },
-	python = { "pylint" },
+	-- lua = { "luacheck" },
+	python = { "flake8", "mypy" },
+	-- sql = { "sqlfluff" },
 }
 
 return M

@@ -53,16 +53,16 @@ end
 
 -- lsp keymaps
 M.on_lsp_attach = function(client, bufnr) -- client unused, keep here as a reminder that it may be useful
-	Map("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Show LSP references (Buffer)" })
+	-- Map("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Show LSP references (Buffer)" }) -- replaced by telescope
 	Map(
 		"n",
-		"<leader>gR",
+		"<leader>gr",
 		"<cmd>Telescope lsp_references<CR>",
 		{ buffer = bufnr, desc = "Show LSP references (Telescope)" }
 	)
 	Map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Smart rename" })
 	Map("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
-	Map("n", "<leader>gd", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to definition" })
+	Map("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
 	Map({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help" })
 	Map("n", "<leader>i", vim.diagnostic.open_float, { desc = "Show diagnostic float" })
 end
