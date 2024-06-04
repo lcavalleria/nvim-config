@@ -24,13 +24,13 @@ M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
 M.formatters = {
 	lua = { "stylua" },
 	python = { "isort", "black" }, -- isort for imports, black for formatting
-	sql = { "sql-formatter" },
+	sql = { "sqlfmt" },
 }
 
 M.linters = {
-	-- lua = { "luacheck" },
+	lua = { "luacheck" },
 	python = { "flake8", "mypy" },
-	-- sql = { "sqlfluff" },
+	sql = { "sqlfluff" },
 }
 
 return M
