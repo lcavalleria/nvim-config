@@ -3,7 +3,10 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
-		opts = { filters = { dotfiles = true, git_ignored = false }, update_focused_file = { enable = true, update_root = true } },
+		opts = {
+			filters = { dotfiles = true, git_ignored = false },
+			update_focused_file = { enable = true, update_root = true },
+		},
 	},
 	"folke/which-key.nvim",
 	{ -- Comments
@@ -33,6 +36,12 @@ return {
 		"norcalli/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
 		end,
 	},
 }

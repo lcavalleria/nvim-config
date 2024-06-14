@@ -34,7 +34,7 @@ return {
 			})
 		end
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
+		-- Change the Diagnostic symbols in the sign column
 		local signs = require("rasmok.utils.icons").diagnostic_signs
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type

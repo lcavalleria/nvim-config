@@ -1,5 +1,6 @@
 local table_utils = require("rasmok.utils.table_utils")
 local flatten = table_utils.flatten
+local values_of = table_utils.values_of
 
 return {
 	"williamboman/mason.nvim",
@@ -37,7 +38,6 @@ return {
 			automatic_installation = true,
 		})
 
-		local values_of = table_utils.values_of
 		local tools_to_install = values_of(flatten({ flatten(tools.formatters), flatten(tools.linters) }))
 		mason_tool_installer.setup({
 			ensure_installed = tools_to_install,

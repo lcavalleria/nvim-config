@@ -28,7 +28,7 @@ M.formatters = {
 }
 
 M.linters = {
-	lua = { "luacheck" },
+	-- lua = { "luacheck" },
 	python = { "flake8", "mypy" },
 	sql = { "sqlfluff" },
 }
