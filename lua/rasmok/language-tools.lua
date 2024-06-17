@@ -12,6 +12,7 @@ M.treesitter = { -- Languages we want to install in treesitter
 	"vimdoc",
 	"html",
 	"sql",
+	"json",
 }
 
 M.lsps = { -- Key: Lsp Name. Value: Lsp Settings (can be empty)
@@ -25,6 +26,7 @@ M.formatters = {
 	lua = { "stylua" },
 	python = { "isort", "black" }, -- isort for imports, black for formatting
 	sql = { "sqlfmt" },
+	json = { "jq" },
 }
 
 M.linters = {
