@@ -10,7 +10,6 @@ return {
 				"clippy",
 				"--workspace",
 				"--message-format=json",
-				"--all-targets",
 				"--all-features",
 			},
 		},
