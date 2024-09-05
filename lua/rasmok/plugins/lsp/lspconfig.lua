@@ -15,10 +15,6 @@ return {
 		-- assign keybinds on attach
 		local on_attach = function(client, bufnr)
 			require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
-			-- TODO: move to autocmd 'LspAttach'?. Fix after 0.10 release (may have changed)
-			if client.server_capabilities.inlayHintProvider then
-				vim.lsp.inlay_hint.enable(bufnr, true)
-			end
 		end
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -33,6 +29,8 @@ return {
 				settings = v,
 			})
 		end
+
+    vim.lsp.inlay_hint.enable(true)
 
 		-- Change the Diagnostic symbols in the sign column
 		local signs = require("rasmok.utils.icons").diagnostic_signs
