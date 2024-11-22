@@ -4,6 +4,13 @@ local function noop(...)
 	return ...
 end
 
+local function concat(t1, t2)
+	for i = 1, #t2 do
+		t1[#t1 + 1] = t2[i]
+	end
+	return t1
+end
+
 -- convert a nested table to a flat table
 local function flatten(t, sep, key_modifier, res)
 	if type(t) ~= "table" then
@@ -96,5 +103,6 @@ M.table_to_string = table_to_string
 M.values_of = values_of
 M.keys_of = keys_of
 M.map_values = map_values
+M.concat = concat
 
 return M

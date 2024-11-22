@@ -1,3 +1,7 @@
+local table_utils = require("rasmok.utils.table_utils")
+local concat = table_utils.concat
+local table_to_string = table_utils.table_to_string
+
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
@@ -19,7 +23,10 @@ return {
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		local lsps = require("rasmok.language-tools").lsps
+		local language_tools = require("rasmok.language-tools")
+		local lsps = concat(language_tools.mason_lsps, language_tools.external_lsps)
+    print("Lspconfig lsps:")
+		print(table_to_string(lsps))
 
 		-- configure language servers
 		for k, v in pairs(lsps) do
@@ -30,7 +37,7 @@ return {
 			})
 		end
 
-    vim.lsp.inlay_hint.enable(true)
+		vim.lsp.inlay_hint.enable(true)
 
 		-- Change the Diagnostic symbols in the sign column
 		local signs = require("rasmok.utils.icons").diagnostic_signs
