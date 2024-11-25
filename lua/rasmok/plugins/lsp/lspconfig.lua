@@ -1,6 +1,6 @@
 local table_utils = require("rasmok.utils.table_utils")
+local on_attach = require("rasmok.language-tools").on_attach
 local concat = table_utils.concat
-local table_to_string = table_utils.table_to_string
 
 return {
 	"neovim/nvim-lspconfig",
@@ -16,17 +16,11 @@ return {
 		local lspconfig = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		-- assign keybinds on attach
-		local on_attach = function(client, bufnr)
-			require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
-		end
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		local language_tools = require("rasmok.language-tools")
 		local lsps = concat(language_tools.mason_lsps, language_tools.external_lsps)
-    print("Lspconfig lsps:")
-		print(table_to_string(lsps))
 
 		-- configure language servers
 		for k, v in pairs(lsps) do

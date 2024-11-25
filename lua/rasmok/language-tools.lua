@@ -41,4 +41,8 @@ M.linters = {
 	sql = { "sqlfluff" },
 }
 
+M.on_attach = function(client, bufnr)
+	require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
+end
+
 return M

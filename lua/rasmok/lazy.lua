@@ -21,6 +21,7 @@ local plugins = {
 	spec = {
 		{ import = "rasmok.plugins" },
 		{ import = "rasmok.plugins.lsp" },
+		{ import = "rasmok.plugins.lsp.plugins" },
 	},
 	-- ui
 	ui = {
