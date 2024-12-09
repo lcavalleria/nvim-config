@@ -12,3 +12,5 @@
 - luarocks
 ### Rust
 - analyzer, cargo clippy ??? 
+### Scala
+- wip, not working atm.

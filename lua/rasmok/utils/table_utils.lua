@@ -1,14 +1,20 @@
 local M = {}
 
+local table_to_string
+
 local function noop(...)
 	return ...
 end
 
 local function concat(t1, t2)
-	for i = 1, #t2 do
-		t1[#t1 + 1] = t2[i]
+	local t3 = {}
+	for k, v in pairs(t1) do
+		t3[k] = v
 	end
-	return t1
+	for k, v in pairs(t2) do
+		t3[k] = v
+	end
+	return t3
 end
 
 -- convert a nested table to a flat table
@@ -43,7 +49,6 @@ local function flatten(t, sep, key_modifier, res)
 end
 
 -- Convert a lua table into a lua syntactically correct string
-local table_to_string
 table_to_string = function(tbl)
 	local result = "{"
 	for k, v in pairs(tbl) do

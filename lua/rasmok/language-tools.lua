@@ -1,3 +1,4 @@
+local table_to_string = require("rasmok.utils.table_utils").table_to_string
 local M = {}
 
 M.treesitter = { -- Languages we want to install in treesitter
@@ -43,6 +44,7 @@ M.linters = {
 
 M.on_attach = function(client, bufnr)
 	require("rasmok.config.keymaps").on_lsp_attach(client, bufnr)
+	print("Attached lsp client " .. client.name .. " to bufnr " .. bufnr)
 end
 
 return M

@@ -17,6 +17,7 @@ return {
 			pattern = self.ft,
 			callback = function()
 				require("metals").initialize_or_attach(metals_config)
+        print("Initialized metals")
 			end,
 			group = nvim_metals_group,
 		})

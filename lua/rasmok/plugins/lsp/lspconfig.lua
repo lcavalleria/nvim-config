@@ -1,6 +1,7 @@
 local table_utils = require("rasmok.utils.table_utils")
 local on_attach = require("rasmok.language-tools").on_attach
 local concat = table_utils.concat
+local table_to_string = table_utils.table_to_string
 
 return {
 	"neovim/nvim-lspconfig",
